@@ -20,6 +20,7 @@ h1 {
   max-width: 1170px;
   margin: 5rem auto;
   display: grid;
+  align-items: start;
   gap: 2rem;
 }
 
@@ -44,4 +45,8 @@ h1 {
   font-size: 0.75rem;
   margin-top: 0.25rem;
   letter-spacing: 5px;
+}
+
+.book p {
+  margin-top: 0.5rem;
 }

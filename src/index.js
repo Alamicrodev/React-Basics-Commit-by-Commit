@@ -4,39 +4,50 @@ import ReactDom from "react-dom";
 // CSS
 import './index.css';
 
+
+// Setup vars
+const book1  = {
+     title: "Atlas of the Heart",
+     author: "Amelia Hepworth",
+     img: "https://images-na.ssl-images-amazon.com/images/I/91DNhLLmUOL._AC_UL200_SR200,200_.jpg"
+} 
+
+const book2  = {
+     title: "My Little Golden Book about Betty White",
+     author: "Deborah Hopkinson",
+     img: "https://images-na.ssl-images-amazon.com/images/I/81gtzoeueoS._AC_UL200_SR200,200_.jpg"
+} 
+
+
+// Creating a vbase component, that will be rendered in the root grid
 function Booklist() {
   return (
     <section className="booklist">
-      <Book/>
-      <Book/>
-      <Book/>
-      <Book/>
-      <Book/>
+      {/* Notice how i am passing some attributes while calling these components */}
+      <Book title={book1.title} author={book1.author} img={book1.img}/>
+      {/* Notice how this second book component also has a child element? <p> tag */}
+      <Book title={book2.title} author={book2.author} img={book2.img}>
+        <p> This book is trash </p>
+      </Book>
     </section>
   )
 }
 
-const Book = () =>  {
-return (
+// Creating a book component with an image, name and author name jsx elements. 
+// using javscript variables in there. 
+const Book = (props) =>  {
+// The props variable being passed in is a JS object with all the attributes that were passed in
+  return (
    <article className="book"> 
-     <Img></Img>
-      <Title/>
-      <Author/>
+      <img src={ props.img }/>
+      <h1>{ props.title }</h1>
+      <h4>{ props.author.toUpperCase() }</h4>
+      {/* If the component had children where it was called they will show here now*/}
+      {props.children}
    </article>
 )
 }
 
-const Img = () => { return (
-  <img src="https://images-na.ssl-images-amazon.com/images/I/91DNhLLmUOL._AC_UL200_SR200,200_.jpg" />
-)};
-
-
-const Title = () => { return ( <h1>Atlas Of The Heart</h1> ) };
-
-const Author = () => { return ( <h4 style={{color:'#3333', fontSize: '0.75rem', marginTop: "0.25rem"}} > This is an Author </h4> ) };
-
-const Description = () => { return ( <p> lorem20 </p> ) };
-
-
+// Rendering the base component to the root grid in index.html
 ReactDom.render(<Booklist/>, document.getElementById("root"))
 
