@@ -6,37 +6,48 @@ import './index.css';
 
 
 // Setup vars
-const book1  = {
+const allbooks = [ {
+     id: 1,
      title: "Atlas of the Heart",
      author: "Amelia Hepworth",
      img: "https://images-na.ssl-images-amazon.com/images/I/91DNhLLmUOL._AC_UL200_SR200,200_.jpg"
-} 
-
-const book2  = {
+}, 
+ {   id: 2,
      title: "My Little Golden Book about Betty White",
      author: "Deborah Hopkinson",
      img: "https://images-na.ssl-images-amazon.com/images/I/81gtzoeueoS._AC_UL200_SR200,200_.jpg"
-} 
+}, 
+ {   id: 3, 
+     title: "Harry Potter and the socerer's stone",
+     author: "J.K Rowling",
+     img: "https://m.media-amazon.com/images/I/81zhvrYl7yL._SX140_.jpg"
+}, 
+]
 
-
-// Creating a vbase component, that will be rendered in the root grid
-function Booklist() {
-  return (
-    <section className="booklist">
-      {/* Notice how i am passing some attributes while calling these components */}
-      <Book title={book1.title} author={book1.author} img={book1.img}/>
-      {/* Notice how this second book component also has a child element? <p> tag */}
-      <Book title={book2.title} author={book2.author} img={book2.img}>
-        <p> This book is trash </p>
-      </Book>
-    </section>
-  )
-}
-
-// Creating a book component with an image, name and author name jsx elements. 
-// using javscript variables in there. 
+// Creating a base component, that will be rendered in the root grid
+// creating a book list component
+function Booklist(){
+  //returns jsx
+    return (                                
+      // The jsx has section element being passed, remember it must only return one element but that element can have multiple nested elements
+       <section className="booklist">
+          {/* here we send a js variable called allbooks which is an array of various book objects  */}
+          { allbooks.map(
+            // .map function allows us to create a new array with a function applied on each element
+            (book) => { return <Book key={book.id} {...book} /> }
+            // the book is one individual js object, that such a function is working on
+            // whatever the function returns replaces that elements position in the new array. 
+            // we return the Book component with various attributes passed in {...book} is basically title={book.title} author= {book.author} img={book.img}
+            // note: key is a unique attr of each element that if not given react gives an queit error in console. usually it is passed in the apis.     
+                      ) 
+          }            
+       </section>
+          )
+ };  
+ 
 const Book = (props) =>  {
-// The props variable being passed in is a JS object with all the attributes that were passed in
+  const clickfunc = () => {
+  }
   return (
    <article className="book"> 
       <img src={ props.img }/>
